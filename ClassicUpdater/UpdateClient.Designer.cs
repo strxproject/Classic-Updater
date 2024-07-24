@@ -1,6 +1,6 @@
 ﻿namespace ClassicUpdater
 {
-    partial class Form1
+    partial class UpdateClient
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateClient));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.themeLabel1 = new WindowsFormsAero.ThemeLabel();
             this.themeLabel2 = new WindowsFormsAero.ThemeLabel();
-            this.button1 = new WindowsFormsAero.Button();
-            this.textBox1 = new WindowsFormsAero.TextBox();
+            this.checkUpdates = new WindowsFormsAero.Button();
+            this.changelogsBox = new WindowsFormsAero.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,37 +65,39 @@
             this.themeLabel2.TabIndex = 2;
             this.themeLabel2.Text = "Welcome to Classic Updater. You can update Classic 7 here.";
             // 
-            // button1
+            // checkUpdates
             // 
-            this.button1.Location = new System.Drawing.Point(270, 525);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 34);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Check for Updates";
-            this.button1.UseVisualStyleBackColor = true;
+            this.checkUpdates.Location = new System.Drawing.Point(270, 525);
+            this.checkUpdates.Name = "checkUpdates";
+            this.checkUpdates.Size = new System.Drawing.Size(125, 34);
+            this.checkUpdates.TabIndex = 3;
+            this.checkUpdates.Text = "Check for Updates";
+            this.checkUpdates.UseVisualStyleBackColor = true;
+            this.checkUpdates.Click += new System.EventHandler(this.checkUpdates_Click);
             // 
-            // textBox1
+            // changelogsBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(222, 313);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(221, 197);
-            this.textBox1.TabIndex = 4;
+            this.changelogsBox.BackColor = System.Drawing.Color.Black;
+            this.changelogsBox.Location = new System.Drawing.Point(133, 311);
+            this.changelogsBox.Multiline = true;
+            this.changelogsBox.Name = "changelogsBox";
+            this.changelogsBox.ReadOnly = true;
+            this.changelogsBox.Size = new System.Drawing.Size(409, 197);
+            this.changelogsBox.TabIndex = 4;
             // 
-            // Form1
+            // UpdateClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 647);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.changelogsBox);
+            this.Controls.Add(this.checkUpdates);
             this.Controls.Add(this.themeLabel2);
             this.Controls.Add(this.themeLabel1);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "Form1";
+            this.Name = "UpdateClient";
             this.Text = "Classic Updater";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -108,8 +110,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private WindowsFormsAero.ThemeLabel themeLabel1;
         private WindowsFormsAero.ThemeLabel themeLabel2;
-        private WindowsFormsAero.Button button1;
-        private WindowsFormsAero.TextBox textBox1;
+        private WindowsFormsAero.Button checkUpdates;
+        private WindowsFormsAero.TextBox changelogsBox;
     }
 }
 
