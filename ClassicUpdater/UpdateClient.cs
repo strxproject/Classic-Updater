@@ -3,12 +3,16 @@ using System.Drawing;
 using System.Net.Http;
 using System.Windows.Forms;
 using WindowsFormsAero;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace ClassicUpdater
 {
     public partial class UpdateClient : WindowsFormsAero.AeroForm
     {
         private NotifyIcon notifyIcon;
+        private string updateVersion = "";
 
         public UpdateClient()
         {
@@ -25,88 +29,99 @@ namespace ClassicUpdater
             };
 
             changelogsBox.Multiline = true;
-            changelogsBox.ScrollBars = ScrollBars.None;
+            changelogsBox.ScrollBars = ScrollBars.Vertical;
             changelogsBox.WordWrap = false;
 
             AutoScroll = true;
         }
 
-        private async void checkUpdates_Click(object sender, EventArgs e)
+        private void checkUpdates_Click(object sender, EventArgs e)
         {
-            string url = "http://127.0.0.1:5000/getchangelog";
+            string changelogUrl = "http://127.0.0.1:5000/getchangelog";
+            string versionUrl = "http://127.0.0.1:5000/getversion";
+
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string changelogContent = await client.GetStringAsync(url);
+                    Debug.WriteLine($"Accessing version URL: {versionUrl}");
 
-                    changelogContent = NormalizeLineBreaks(changelogContent);
+                    var versionResponse = client.GetStringAsync(versionUrl).GetAwaiter().GetResult();
+                    var versionData = JObject.Parse(versionResponse);
+                    updateVersion = (string)versionData["version"];
 
-                    string version = ExtractVersion(changelogContent);
+                    Debug.WriteLine($"Fetched version: '{updateVersion}'");
 
-                    string cleanedContent = RemoveVersionLine(changelogContent);
+                    Debug.WriteLine($"Accessing changelog URL: {changelogUrl}");
+                    string changelogResponse = client.GetStringAsync(changelogUrl).GetAwaiter().GetResult();
+                    var changelogData = JObject.Parse(changelogResponse);
 
-                    changelogsBox.Text = cleanedContent;
+                    string changelogContent = (string)changelogData["changelog"];
+                    changelogsBox.Text = FormatChangelog(changelogContent, updateVersion);
 
-                    ShowUpdateNotification(version);
+                    string updateUrl = $"http://127.0.0.1:5000/updates/{Uri.EscapeDataString(updateVersion)}/update.upd";
+                    Debug.WriteLine($"Accessing update URL: {updateUrl}");
+
+                    InstallUpdate(client, updateUrl);
                 }
-            }
-            catch (HttpRequestException httpEx)
-            {
-                MessageBox.Show($"Request error: {httpEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
+                LogException(ex);
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private string NormalizeLineBreaks(string text)
+        private void InstallUpdate(HttpClient client, string updateUrl)
         {
-            text = text.Replace("\r\n", "\n").Replace("\r", "\n");
-            return text.Replace("\n", "\r\n");
-        }
-
-        private string ExtractVersion(string changelogContent)
-        {
-            string versionPrefix = "@version: ";
-            int versionStartIndex = changelogContent.IndexOf(versionPrefix);
-            if (versionStartIndex != -1)
+            try
             {
-                int versionEndIndex = changelogContent.IndexOf('\n', versionStartIndex);
-                if (versionEndIndex == -1)
-                    versionEndIndex = changelogContent.Length;
+                string updateContent = client.GetStringAsync(updateUrl).GetAwaiter().GetResult();
 
-                string versionLine = changelogContent.Substring(versionStartIndex, versionEndIndex - versionStartIndex);
-                return versionLine.Replace(versionPrefix, "").Trim();
+                JObject updateData = JObject.Parse(updateContent);
+
+                foreach (var fileEntry in updateData["files"])
+                {
+                    string sourceFileName = (string)fileEntry["source"];
+                    string destinationPath = (string)fileEntry["destination"];
+
+                    string fileUrl = $"http://127.0.0.1:5000/updates/{Uri.EscapeDataString(updateVersion)}/files/{Uri.EscapeDataString(sourceFileName)}";
+                    Debug.WriteLine($"Accessing File URL: {fileUrl}");
+
+                    byte[] fileBytes = client.GetByteArrayAsync(fileUrl).GetAwaiter().GetResult();
+                    string directoryPath = Path.GetDirectoryName(destinationPath);
+
+                    if (!Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+
+                    File.WriteAllBytes(destinationPath, fileBytes);
+                }
+
+                MessageBox.Show("Update installed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                checkUpdates.Text = "Check for Updates";
             }
-            return "Unknown version";
-        }
-
-        private string RemoveVersionLine(string changelogContent)
-        {
-            string versionPrefix = "@version: ";
-            int versionStartIndex = changelogContent.IndexOf(versionPrefix);
-            if (versionStartIndex != -1)
+            catch (Exception ex)
             {
-                int versionEndIndex = changelogContent.IndexOf('\n', versionStartIndex);
-                if (versionEndIndex == -1)
-                    versionEndIndex = changelogContent.Length;
-
-                string versionLine = changelogContent.Substring(versionStartIndex, versionEndIndex - versionStartIndex);
-                string cleanedContent = changelogContent.Replace(versionLine, "").Trim();
-
-                return NormalizeLineBreaks(cleanedContent);
+                LogException(ex);
+                MessageBox.Show($"An error occurred during update installation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return NormalizeLineBreaks(changelogContent);
         }
 
-        private void ShowUpdateNotification(string version)
+        private string FormatChangelog(string changelog, string version)
         {
-            notifyIcon.BalloonTipTitle = $"New update found: {version}";
-            notifyIcon.BalloonTipText = "The changelog has been updated.";
-            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
-            notifyIcon.ShowBalloonTip(3000);
+            changelog = changelog.Replace("\r\n", "\n").Replace("\r", "\n");
+            string formattedChangelog = changelog.Replace("\n", "\r\n");
+            formattedChangelog += $"\r\nVersion: {version}";
+            return formattedChangelog;
+        }
+
+        private void LogException(Exception ex)
+        {
+            Debug.WriteLine($"Exception: {ex.GetType().Name}");
+            Debug.WriteLine($"Message: {ex.Message}");
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}");
         }
     }
 }
