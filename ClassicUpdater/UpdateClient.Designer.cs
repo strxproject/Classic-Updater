@@ -41,7 +41,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(256, 74);
+            this.pictureBox1.Location = new System.Drawing.Point(183, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 150);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -51,7 +51,7 @@
             // themeLabel1
             // 
             this.themeLabel1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.themeLabel1.Location = new System.Drawing.Point(261, 238);
+            this.themeLabel1.Location = new System.Drawing.Point(190, 168);
             this.themeLabel1.Name = "themeLabel1";
             this.themeLabel1.Size = new System.Drawing.Size(145, 27);
             this.themeLabel1.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // themeLabel2
             // 
-            this.themeLabel2.Location = new System.Drawing.Point(172, 271);
+            this.themeLabel2.Location = new System.Drawing.Point(103, 201);
             this.themeLabel2.Name = "themeLabel2";
             this.themeLabel2.Size = new System.Drawing.Size(331, 20);
             this.themeLabel2.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // checkUpdates
             // 
-            this.checkUpdates.Location = new System.Drawing.Point(270, 525);
+            this.checkUpdates.Location = new System.Drawing.Point(206, 467);
             this.checkUpdates.Name = "checkUpdates";
             this.checkUpdates.Size = new System.Drawing.Size(125, 34);
             this.checkUpdates.TabIndex = 3;
@@ -77,24 +77,24 @@
             // 
             // changelogsBox
             // 
-            this.changelogsBox.BackColor = System.Drawing.Color.Black;
-            this.changelogsBox.Location = new System.Drawing.Point(133, 311);
+            this.changelogsBox.Location = new System.Drawing.Point(62, 246);
             this.changelogsBox.Multiline = true;
             this.changelogsBox.Name = "changelogsBox";
             this.changelogsBox.ReadOnly = true;
-            this.changelogsBox.Size = new System.Drawing.Size(409, 197);
+            this.changelogsBox.Size = new System.Drawing.Size(414, 197);
             this.changelogsBox.TabIndex = 4;
             // 
             // UpdateClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 647);
+            this.ClientSize = new System.Drawing.Size(544, 513);
             this.Controls.Add(this.changelogsBox);
             this.Controls.Add(this.checkUpdates);
             this.Controls.Add(this.themeLabel2);
             this.Controls.Add(this.themeLabel1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "UpdateClient";

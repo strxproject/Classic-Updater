@@ -18,7 +18,7 @@ namespace ClassicUpdater
         {
             InitializeComponent();
             _ = new DarkModeCS(this);
-            GlassMargins = new Padding(600, 600, 600, 600);
+            GlassMargins = new Padding(0, 223, 0, 0);
             PInvoke.Methods.SetWindowAttribute(Handle, PInvoke.ParameterTypes.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
             PInvoke.Methods.SetWindowAttribute(Handle, PInvoke.ParameterTypes.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, 1);
 
