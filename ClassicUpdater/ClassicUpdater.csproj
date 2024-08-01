@@ -50,19 +50,14 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsFormsAero, Version=3.1.1.0, Culture=neutral, PublicKeyToken=1e7518d9b51ece33, processorArchitecture=MSIL">
-      <HintPath>packages\Windows-Forms-Aero.3.1.1\lib\net461\WindowsFormsAero.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dark.cs" />
     <Compile Include="UpdateClient.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UpdateClient.Designer.cs">
       <DependentUpon>UpdateClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="PInvoke.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="UpdateClient.resx">
@@ -76,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -93,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Classic Updater Icon.ico" />
+    <None Include="Resources\crossShield.png" />
+    <Content Include="Resources\tickShield.png" />
+    <Content Include="Resources\exclamationShield.png" />
+    <None Include="Resources\updateIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
