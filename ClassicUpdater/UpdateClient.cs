@@ -150,7 +150,7 @@ namespace ClassicUpdater
             }
         }
 
-                private void UpdateUIForCheckingUpdates()
+        private void UpdateUIForCheckingUpdates()
         {
             infoPanel.Size = new Size(499, 75);
             shieldImage.Location = new Point(9, 8);
