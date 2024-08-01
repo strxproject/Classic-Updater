@@ -113,30 +113,6 @@ namespace ClassicUpdater
             return available.CompareTo(current) > 0;
         }
 
-        private void UpdateUIForCheckingUpdates()
-        {
-            infoPanel.Size = new Size(499, 75);
-            shieldImage.Location = new Point(9, 8);
-            updateText.Location = new Point(67, 12);
-            mostrecheader.Location = new Point(53, 167);
-            dateCheckUpd.Location = new Point(234, 167);
-            updinstalledheader.Location = new Point(52, 186);
-            dateInstalledUpd.Location = new Point(234, 186);
-            viewupdhistorylink.Location = new Point(335, 186);
-            yourecupdheader.Location = new Point(53, 205);
-            recieveUpdateLabel.Location = new Point(234, 205);
-            getupdPanel.Location = new Point(56, 240);
-
-            shieldImage.BackgroundImage = Properties.Resources.updateIcon;
-            updateText.Text = "Checking for updates...";
-            updateTextBelow.Visible = false;
-            updcheckbutton.Visible = false;
-            updcheckbutton.Text = "Install updates";
-            updatePanel.Visible = false;
-            progressBar1.Visible = true;
-            dateCheckUpd.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-        }
-
         private async Task InstallUpdateAsync(HttpClient client, string updateUrl)
         {
             try
@@ -172,6 +148,30 @@ namespace ClassicUpdater
                 LogException(ex);
                 MessageBox.Show($"An error occurred during update installation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+                private void UpdateUIForCheckingUpdates()
+        {
+            infoPanel.Size = new Size(499, 75);
+            shieldImage.Location = new Point(9, 8);
+            updateText.Location = new Point(67, 12);
+            mostrecheader.Location = new Point(53, 167);
+            dateCheckUpd.Location = new Point(234, 167);
+            updinstalledheader.Location = new Point(52, 186);
+            dateInstalledUpd.Location = new Point(234, 186);
+            viewupdhistorylink.Location = new Point(335, 186);
+            yourecupdheader.Location = new Point(53, 205);
+            recieveUpdateLabel.Location = new Point(234, 205);
+            getupdPanel.Location = new Point(56, 240);
+
+            shieldImage.BackgroundImage = Properties.Resources.updateIcon;
+            updateText.Text = "Checking for updates...";
+            updateTextBelow.Visible = false;
+            updcheckbutton.Visible = false;
+            updcheckbutton.Text = "Install updates";
+            updatePanel.Visible = false;
+            progressBar1.Visible = true;
+            dateCheckUpd.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
         }
 
         private void UpdateUIForInstallingUpdates()
