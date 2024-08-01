@@ -12,6 +12,7 @@ namespace ClassicUpdater
 {
     public partial class UpdateClient : Form
     {
+        string currentVersion = "0.2.1";
         private string updateVersion = "";
         private bool updateAvailable = false;
 
@@ -24,16 +25,16 @@ namespace ClassicUpdater
 
         private void InitializeCustomComponents()
         {
-            updatePanel.Paint += UpdatePanel_Paint;
+            updatePanel.Paint += UpdatePanel_PaintCheckUpdate;
             updcheckbutton.Click += updcheckbutton_Click;
         }
 
         private void InitializeAlternateCustomComponents()
         {
-            updatePanel.Paint += UpdatePanel_Paint2;
+            updatePanel.Paint += UpdatePanel_PaintUpdateFound;
         }
 
-        private void UpdatePanel_Paint(object sender, PaintEventArgs e)
+        private void UpdatePanel_PaintCheckUpdate(object sender, PaintEventArgs e)
         {
             using (var brush = new LinearGradientBrush(
                 updatePanel.ClientRectangle,
@@ -45,7 +46,7 @@ namespace ClassicUpdater
             }
         }
 
-        private void UpdatePanel_Paint2(object sender, PaintEventArgs e)
+        private void UpdatePanel_PaintUpdateFound(object sender, PaintEventArgs e)
         {
             using (var brush = new LinearGradientBrush(
                 updatePanel.ClientRectangle,
@@ -83,7 +84,6 @@ namespace ClassicUpdater
                         Debug.WriteLine($"Fetched version: '{updateVersion}'");
                         this.versioncurrentinstallinglabel.Text = $"Currently installing: {updateVersion}";
 
-                        string currentVersion = "0.2.1";
                         if (IsUpdateAvailable(currentVersion, updateVersion))
                         {
                             updateAvailable = true;
@@ -163,7 +163,6 @@ namespace ClassicUpdater
             yourecupdheader.Location = new Point(53, 205);
             recieveUpdateLabel.Location = new Point(234, 205);
             getupdPanel.Location = new Point(56, 240);
-
             shieldImage.BackgroundImage = Properties.Resources.updateIcon;
             updateText.Text = "Checking for updates...";
             updateTextBelow.Visible = false;
@@ -187,7 +186,6 @@ namespace ClassicUpdater
             yourecupdheader.Location = new Point(53, 205);
             recieveUpdateLabel.Location = new Point(234, 205);
             getupdPanel.Location = new Point(56, 240);
-
             shieldImage.BackgroundImage = Properties.Resources.updateIcon;
             updateText.Text = "Downloading and installing updates";
             updateTextBelow.Visible = false;
@@ -195,6 +193,9 @@ namespace ClassicUpdater
             updcheckbutton.Text = "Try again";
             updatePanel.Visible = false;
             progressBar1.Visible = true;
+            curverlabel.Visible = false;
+            newverlabel.Visible = false;
+            updatesizelabel.Visible = false;
             versioncurrentinstallinglabel.Visible = true;
             dateInstalledUpd.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
         }
@@ -213,10 +214,14 @@ namespace ClassicUpdater
             yourecupdheader.Location = new Point(53, 254);
             recieveUpdateLabel.Location = new Point(234, 254);
             getupdPanel.Location = new Point(56, 289);
-
             updatePanel.Size = new Size(20, 119);
             updcheckbutton.Size = new Size(93, 23);
             infoPanel.Size = new Size(488, 120);
+            updatesizelabel.Visible = true;
+            curverlabel.Text = $"Current version: {currentVersion}";
+            curverlabel.Visible = true;
+            newverlabel.Text = $"New version: {updateVersion}";
+            newverlabel.Visible = true;
             updcheckbutton.Location = new Point(384, 85);
             shieldImage.BackgroundImage = Properties.Resources.exclamationShield;
             progressBar1.Visible = false;

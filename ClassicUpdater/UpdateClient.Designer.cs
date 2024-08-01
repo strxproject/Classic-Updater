@@ -48,6 +48,9 @@
             this.getupdfindoutlink = new System.Windows.Forms.LinkLabel();
             this.getupdheader = new System.Windows.Forms.Label();
             this.versioncurrentinstallinglabel = new System.Windows.Forms.Label();
+            this.curverlabel = new System.Windows.Forms.Label();
+            this.newverlabel = new System.Windows.Forms.Label();
+            this.updatesizelabel = new System.Windows.Forms.Label();
             this.infoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shieldImage)).BeginInit();
             this.getupdPanel.SuspendLayout();
@@ -97,6 +100,9 @@
             // infoPanel
             // 
             this.infoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.infoPanel.Controls.Add(this.updatesizelabel);
+            this.infoPanel.Controls.Add(this.newverlabel);
+            this.infoPanel.Controls.Add(this.curverlabel);
             this.infoPanel.Controls.Add(this.versioncurrentinstallinglabel);
             this.infoPanel.Controls.Add(this.progressBar1);
             this.infoPanel.Controls.Add(this.updcheckbutton);
@@ -256,6 +262,39 @@
             this.versioncurrentinstallinglabel.Text = "Currently installing:";
             this.versioncurrentinstallinglabel.Visible = false;
             // 
+            // curverlabel
+            // 
+            this.curverlabel.AutoSize = true;
+            this.curverlabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.curverlabel.Location = new System.Drawing.Point(83, 38);
+            this.curverlabel.Name = "curverlabel";
+            this.curverlabel.Size = new System.Drawing.Size(91, 15);
+            this.curverlabel.TabIndex = 15;
+            this.curverlabel.Text = "Current version:";
+            this.curverlabel.Visible = false;
+            // 
+            // newverlabel
+            // 
+            this.newverlabel.AutoSize = true;
+            this.newverlabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newverlabel.Location = new System.Drawing.Point(83, 57);
+            this.newverlabel.Name = "newverlabel";
+            this.newverlabel.Size = new System.Drawing.Size(75, 15);
+            this.newverlabel.TabIndex = 16;
+            this.newverlabel.Text = "New version:";
+            this.newverlabel.Visible = false;
+            // 
+            // updatesizelabel
+            // 
+            this.updatesizelabel.AutoSize = true;
+            this.updatesizelabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updatesizelabel.Location = new System.Drawing.Point(231, 38);
+            this.updatesizelabel.Name = "updatesizelabel";
+            this.updatesizelabel.Size = new System.Drawing.Size(124, 15);
+            this.updatesizelabel.TabIndex = 17;
+            this.updatesizelabel.Text = "Update size: 0.01 MB";
+            this.updatesizelabel.Visible = false;
+            // 
             // UpdateClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -306,6 +345,9 @@
         private System.Windows.Forms.Button updcheckbutton;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label versioncurrentinstallinglabel;
+        private System.Windows.Forms.Label curverlabel;
+        private System.Windows.Forms.Label newverlabel;
+        private System.Windows.Forms.Label updatesizelabel;
     }
 }
 
