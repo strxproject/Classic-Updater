@@ -195,7 +195,6 @@ namespace ClassicUpdater
             progressBar1.Visible = true;
             curverlabel.Visible = false;
             newverlabel.Visible = false;
-            updatesizelabel.Visible = false;
             versioncurrentinstallinglabel.Visible = true;
             dateInstalledUpd.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
         }
@@ -217,7 +216,6 @@ namespace ClassicUpdater
             updatePanel.Size = new Size(20, 119);
             updcheckbutton.Size = new Size(93, 23);
             infoPanel.Size = new Size(488, 120);
-            updatesizelabel.Visible = true;
             curverlabel.Text = $"Current version: {currentVersion}";
             curverlabel.Visible = true;
             newverlabel.Text = $"New version: {updateVersion}";
