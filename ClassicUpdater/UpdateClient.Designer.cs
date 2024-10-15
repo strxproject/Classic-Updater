@@ -201,7 +201,7 @@
             this.yourecupdheader.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yourecupdheader.Location = new System.Drawing.Point(53, 232);
             this.yourecupdheader.Name = "yourecupdheader";
-            this.yourecupdheader.Size = new System.Drawing.Size(115, 15);
+            this.yourecupdheader.Size = new System.Drawing.Size(116, 15);
             this.yourecupdheader.TabIndex = 8;
             this.yourecupdheader.Text = "You recieve updates:";
             // 
@@ -300,6 +300,7 @@
             this.Controls.Add(this.headerLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UpdateClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Classic Updater";
             this.infoPanel.ResumeLayout(false);
             this.infoPanel.PerformLayout();

@@ -12,7 +12,7 @@ namespace ClassicUpdater
 {
     public partial class UpdateClient : Form
     {
-        string currentVersion = "0.2.1";
+        string currentVersion = "0.4.1";
         private string updateVersion = "";
         private bool updateAvailable = false;
 
@@ -70,7 +70,7 @@ namespace ClassicUpdater
             }
             else
             {
-                string versionUrl = "https://updates.starix.lol/getversion";
+                string versionUrl = "https://updates.eqilia.gay/getversion";
                 UpdateUIForCheckingUpdates();
 
                 try
@@ -87,7 +87,7 @@ namespace ClassicUpdater
                         if (IsUpdateAvailable(currentVersion, updateVersion))
                         {
                             updateAvailable = true;
-                            string updateUrl = $"https://updates.starix.lol/updates/{Uri.EscapeDataString(updateVersion)}/update.upd";
+                            string updateUrl = $"https://updates.eqilia.gay/updates/{Uri.EscapeDataString(updateVersion)}/update.upd";
                             Debug.WriteLine($"Accessing update URL: {updateUrl}");
                             UpdateUIForUpdateAvailable();
                         }
